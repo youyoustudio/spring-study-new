@@ -13,5 +13,7 @@ public class IOCTest {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc.xml");
         Person person01 =(Person) applicationContext.getBean("person01");
         System.out.println(person01);
+        Person person02 = applicationContext.getBean("person01",Person.class);
+        System.out.println(person01 == person02);//为true，单例模式
     }
 }
