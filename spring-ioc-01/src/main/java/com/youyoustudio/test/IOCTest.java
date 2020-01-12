@@ -11,6 +11,7 @@ public class IOCTest {
     public void test(){
         //ApplicationContext 代表IOC容器
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc.xml");
+        System.out.println("容器完成初始化");
         Person person01 =(Person) applicationContext.getBean("person01");
         System.out.println(person01);
         Person person02 = applicationContext.getBean("person01",Person.class);

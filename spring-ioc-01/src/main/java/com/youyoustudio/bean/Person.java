@@ -1,6 +1,10 @@
 package com.youyoustudio.bean;
 
 public class Person {
+    public Person() {
+        System.out.println("Person对象被创建");
+    }
+
     private String lastName;
     private Integer age;
     private String gender;
@@ -11,6 +15,7 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
+        System.out.println("setLastName方法被调用："+lastName);
         this.lastName = lastName;
     }
 
