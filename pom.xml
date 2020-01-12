@@ -22,6 +22,7 @@
     </dependencies>
     <modules>
         <module>spring-study-new-lesson01</module>
+        <module>spring-ioc-01</module>
     </modules>
 
 
