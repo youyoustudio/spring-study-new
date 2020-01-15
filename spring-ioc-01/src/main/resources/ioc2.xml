@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<!--    正确为各种属性赋值-->
+    <bean id="car" class="com.youyoustudio.bean.Car">
+        <property name="carName" value="别克" />
+        <property name="color" value="红色" />
+        <property name="price" value="20"/>
+    </bean>
+    <bean id="book1" class="com.youyoustudio.bean.Book">
+        <property name="bookName" value="西游记"/>
+        <property name="author" value="吴承恩"/>
+    </bean>
+    <bean id="book2" class="com.youyoustudio.bean.Book">
+        <property name="bookName" value="红楼梦" />
+        <property name="author" value="曹雪芹" />
+    </bean>
+    <bean id="personNull" class="com.youyoustudio.bean.Person">
+        <property name="lastName">
+            <null></null>
+        </property>
+    </bean>
+
+    <bean id="personBean" class="com.youyoustudio.bean.Person">
+        <property name="car">
+            <bean class="com.youyoustudio.bean.Car">
+                <property name="carName" value="小黄车"/>
+                <property name="price" value="1" />
+                <property name="color" value="黄色" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="personRef" class="com.youyoustudio.bean.Person">
+        <property name="lastName" value="张三"/>
+        <property name="car" ref="car"/>
+    </bean>
+
+    <bean id="personList" class="com.youyoustudio.bean.Person">
+        <property name="bookList">
+            <!--相当于bookList = new ArrayList()-->
+            <list>
+                <!--标签集里边添加每一个元素-->
+                <!--内部bean-->
+                <bean class="com.youyoustudio.bean.Book">
+                    <property name="bookName" value="水浒传"/>
+                </bean>
+                <!--引用bean-->
+                <ref bean="book1"/>
+                <ref bean="book2" />
+            </list>
+        </property>
+    </bean>
+    <bean id="personMap" class="com.youyoustudio.bean.Person">
+        <property name="maps">
+            <!--相当于 maps = new LinkedHashMap();-->
+            <map>
+                <!--一个entry代表一个键值对-->
+                <entry key="key01" value="value01"/>
+                <entry key="key02" value-ref="car" />
+                <entry key="key03">
+                    <bean class="com.youyoustudio.bean.Book">
+                        <property name="bookName" value="Java从入门到放弃" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+</beans>
