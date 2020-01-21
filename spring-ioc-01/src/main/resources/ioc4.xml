@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--多实例模式，容器在启动时，不会创建该实例
+    获取时，才创建实例
+    每次获取的实例都不同-->
+    <bean id="personPrototype" scope="prototype" class="com.youyoustudio.bean.Person">
+
+    </bean>
+    <!--单实例模式，默认为单实例，容器在启动时就创建好。所有获取的都是同一个实例。-->
+    <bean id="personSingleton" scope="singleton" class="com.youyoustudio.bean.Person">
+
+    </bean>
+
+    <!--静态工厂方法，class设置静态类全类名，factory-method设置为静态工厂方法，constructor-arg指定参数-->
+    <bean id="personStaticFactory" class="com.youyoustudio.factory.PersonStaticFactory"
+          factory-method="getPerson">
+        <constructor-arg name="name" value="张三"></constructor-arg>
+    </bean>
+
+    <!--设置工厂实例bean-->
+    <bean id="instanceFactory" class="com.youyoustudio.factory.PersonInstanceFactory"></bean>
+    <!--实例工厂方法，class设置bean全类名，factory-bean引用工厂实例bean，factory-method设置工厂方法，constructory-arg指定参数-->
+    <bean id="personInstanceFactory" class="com.youyoustudio.bean.Person" factory-bean="instanceFactory" factory-method="getPerson" >
+        <constructor-arg name="name" value="李四" />
+    </bean>
+
+<!--    <bean name="personFactoryBean" class="com.youyoustudio.bean.Person" factory-bean="personFactoryB"-->
+
+</beans>
