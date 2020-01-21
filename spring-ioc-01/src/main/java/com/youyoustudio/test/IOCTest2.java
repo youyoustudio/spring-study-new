@@ -100,4 +100,25 @@ public class IOCTest2 {
         Car car = applicationContext.getBean("car", Car.class);
         System.out.println(car.getPrice());
     }
+
+    /**
+     * 通过继承实现bean配置信息的重用
+     */
+    @Test
+    public void testExtend(){
+        Person personParent = applicationContext.getBean("personParent", Person.class);
+        System.out.println(personParent);
+        Person personChild = applicationContext.getBean("personChild", Person.class);
+        System.out.println(personChild);
+        System.out.println(personParent == personChild);
+    }
+
+    /**
+     * 测试使用abstract创建bean模板
+     */
+    @Test
+    public void testAbstract(){
+        Person personParent01 = applicationContext.getBean("personParent01", Person.class);
+        System.out.println(personParent01);
+    }
 }

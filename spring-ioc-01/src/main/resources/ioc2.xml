@@ -101,4 +101,24 @@
         <property name="car.price" value="200"></property>
     </bean>
 
+    <!--通过继承实现bean配置信息的重用-->
+    <bean id="personParent" class="com.youyoustudio.bean.Person">
+        <property name="lastName" value="张三" />
+        <property name="email" value="zhangsan@youyoustudio.com"/>
+    </bean>
+    <!--使用parent属性，指定当前bean的配置信息继承与哪个;指定了parent，class属性可以不写-->
+    <bean id="personChild" class="com.youyoustudio.bean.Person" parent="personParent">
+        <property name="lastName" value="李四" />
+        <property name="gender" value="男" />
+    </bean>
+
+    <!--通过abstract属性，创建一个模板bean，只能被其他bean继承，无法直接获取-->
+    <bean id="personParent01" class="com.youyoustudio.bean.Person" abstract="true">
+        <property name="lastName" value="张三" />
+        <property name="email" value="zhangsan@youyoustudio.com"/>
+    </bean>
+    <bean id="personChild01" parent="personParent01">
+        <property name="gender" value="男"></property>
+    </bean>
+
 </beans>
