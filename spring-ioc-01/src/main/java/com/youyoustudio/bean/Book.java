@@ -4,6 +4,10 @@ public class Book {
     private String bookName;
     private String author;
 
+    public Book() {
+        System.out.println("Book 被创建");
+    }
+
     public String getBookName() {
         return bookName;
     }

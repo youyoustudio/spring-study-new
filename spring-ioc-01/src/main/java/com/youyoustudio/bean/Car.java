@@ -1,6 +1,11 @@
 package com.youyoustudio.bean;
 
 public class Car {
+
+    public Car() {
+        System.out.println("Car 被创建");
+    }
+
     private String carName;
     private Integer price;
     private String color;
