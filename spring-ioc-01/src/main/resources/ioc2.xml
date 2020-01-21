@@ -2,7 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-4.0.xsd"
+>
 <!--    正确为各种属性赋值-->
     <bean id="car" class="com.youyoustudio.bean.Car">
         <property name="carName" value="别克" />
@@ -67,6 +72,33 @@
                 </entry>
             </map>
         </property>
+    </bean>
+
+    <bean name="personProperties" class="com.youyoustudio.bean.Person">
+        <property name="properties">
+            <!--相当于 properties = new Properties()-->
+            <props>
+                <!--相当于properties.setProperty("key01","Hello World");-->
+                <prop key="key01">Hello World</prop>
+                <prop key="key02">你好，世界</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--使用util名称空间创建集合类型的bean；方便别人引用-->
+    <!--相当于 new LinkedHashMap()-->
+    <util:map id="mapTest">
+        <entry key="key01" value="123"></entry>
+        <entry key="key02" value="456"></entry>
+    </util:map>
+    <bean id="personUtil" class="com.youyoustudio.bean.Person">
+        <property name="maps" ref="mapTest"></property>
+    </bean>
+
+    <!--级联属性；级联属性即属性的属性，如person.car.carName-->
+    <bean id="personCascade" class="com.youyoustudio.bean.Person">
+        <property name="car" ref="car"></property>
+        <property name="car.price" value="200"></property>
     </bean>
 
 </beans>
