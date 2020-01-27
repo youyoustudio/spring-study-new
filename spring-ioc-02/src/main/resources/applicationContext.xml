@@ -10,9 +10,13 @@
     我们可以为bean自定义一些生命周期方法；spring在创建或者销毁的时候就会调用指定的方法；
     自定义初始化和销毁方法：不能带参数，但可以抛出异常
     -->
-    <!--<bean id="book01" class="bean.Book" init-method="init" destroy-method="destory" scope="singleton">
-    </bean>-->
 
-    <bean id="book02" class="bean.Book" init-method="init" destroy-method="destory" scope="prototype">
+    <!--单实例-->
+    <bean id="book01" class="bean.Book" init-method="init" destroy-method="destory" scope="singleton">
     </bean>
+
+    <!--非单例-->
+    <!--<bean id="book02" class="bean.Book" init-method="init" destroy-method="destory" scope="prototype">
+    </bean>-->
+    <bean id="myBeanPostProcessor" class="bean.MyBeanPostProcessor"></bean>
 </beans>

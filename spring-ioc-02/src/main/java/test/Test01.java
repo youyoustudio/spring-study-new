@@ -30,4 +30,13 @@ public class Test01 {
         System.out.println(book02);
         applicationContext.close();
     }
+
+    /**
+     * Bean后置处理器
+     */
+    @Test
+    public void testBeanPostProcessor(){
+        System.out.println("容器初始化完成！");
+        applicationContext.close();
+    }
 }
