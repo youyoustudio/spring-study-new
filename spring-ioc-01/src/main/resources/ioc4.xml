@@ -27,6 +27,7 @@
         <constructor-arg name="name" value="李四" />
     </bean>
 
-<!--    <bean name="personFactoryBean" class="com.youyoustudio.bean.Person" factory-bean="personFactoryB"-->
+    <!--通过实现FactoryBean接口-->
+    <bean id="bookFacoryBean" class="com.youyoustudio.factory.BookFactoryBeanImpl"></bean>
 
 </beans>

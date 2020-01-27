@@ -41,4 +41,14 @@ public class IOCTest04 {
         System.out.println(person == person02);
     }
 
+    @Test
+    public void testFactoryBean(){
+        System.out.println("容器启动完成");
+        Object bookFacoryBean = applicationContext.getBean("bookFacoryBean");
+        System.out.println(bookFacoryBean);
+        Object bookFactoryBean2 = applicationContext.getBean("bookFacoryBean");
+        System.out.println(bookFacoryBean == bookFactoryBean2);
+
+    }
+
 }
