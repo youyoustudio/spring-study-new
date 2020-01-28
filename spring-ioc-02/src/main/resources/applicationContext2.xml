@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="car" class="bean.Car">
+        <property name="carName" value="别克"/>
+        <property name="price" value="200"/>
+        <property name="color" value="红色"/>
+    </bean>
+
+    <!--
+            <property name="car" ref="car"/> 手动赋值
+            自动赋值（自动装配):仅限于自定义类型的组件进行赋值，不能给基本类型赋值。
+            autowire="default/no" 默认不自动装配,no不自动装配
+            按照某种规则自动装配
+            autowire="byName" 按照名字
+                以属性名称为id去容器中找到一个组件，为他赋值，如果找不到，则赋值为null。如private Car car; 就回去容器中查找id为car的组件
+                等价于 car = ioc.getBean("car");
+            autowire="byType"
+            以属性的类型作作为查找的依据去容器中查找这个组件
+            private Car car;
+            car = ioc.getBean(Car.class);
+            如果容器中有多个该类型的组件，则会报NoUniqueBeanDefinitionException异常
+            如果没找到，装配null
+            autowire="constructor"按照构造器进行装配赋值
+            1. 先按照有参构造器参数类型装配，没有就直接为组件装配null
+            2. 如果按照类型找到多个，以参数名作为id，去容器中继续查找组件。找到则赋值，否则赋值为null，不会报错。
+    -->
+    <bean id="person" class="bean.Person" autowire="constructor">
+    </bean>
+
+    <!--SpEL(Spring Expression Langage) Spring 表达式语言
+    在SpEL中，使用字面量
+    引用其他bean
+    引用其他bean的某个属性值
+    调用非静态方法
+    调用静态方法
+    使用运算符：都支持
+    -->
+    <bean id="person01" class="bean.Person">
+        <!--使用字面量-->
+        <property name="age" value="#{18}"/>
+        <!--使用运算符-->
+        <property name="salary" value="#{12*1000}"/>
+        <!--引用其他bean-->
+        <property name="car" value="#{car}"/>
+        <!--引用其他bean的某个属性值-->
+        <property name="lastName" value="#{car.carName}"/>
+        <!--调用静态方法：语法：#{T(全类名).静态方法(参数1，参数2)}-->
+        <property name="email" value="#{T(java.util.UUID).randomUUID().toString().substring(0,5)}"/>
+        <!--调用非静态方法-->
+        <property name="gender" value="#{car.getCarName()}"/>
+    </bean>
+</beans>

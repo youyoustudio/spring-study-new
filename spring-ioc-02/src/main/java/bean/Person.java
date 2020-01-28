@@ -22,6 +22,7 @@ public class Person {
     private Integer age;
     private String gender;
     private String email;
+    private Double salary;
 
 
     private Car car;
@@ -97,6 +98,14 @@ public class Person {
         this.properties = properties;
     }
 
+    public Double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -104,6 +113,7 @@ public class Person {
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", email='" + email + '\'' +
+                ", salary=" + salary +
                 ", car=" + car +
                 ", bookList=" + bookList +
                 ", maps=" + maps +
