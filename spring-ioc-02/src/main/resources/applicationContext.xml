@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <!--创建带有生命周期方法的bean
     生命周期：bean的创建到销毁
     ioc容器中注册的bean
@@ -19,4 +23,13 @@
     <!--<bean id="book02" class="bean.Book" init-method="init" destroy-method="destory" scope="prototype">
     </bean>-->
     <bean id="myBeanPostProcessor" class="bean.MyBeanPostProcessor"></bean>
+
+    <!--加载外部属性文件-->
+    <context:property-placeholder location="classpath:dbconfig.properties"
+                                  file-encoding="utf-8"></context:property-placeholder>
+    <!--引用属性文件值-->
+    <bean id="book02" class="bean.Book">
+        <property name="bookName" value="${book.bookName}"></property>
+        <property name="author" value="${book.author}"></property>
+    </bean>
 </beans>

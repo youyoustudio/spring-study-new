@@ -35,8 +35,17 @@ public class Test01 {
      * Bean后置处理器
      */
     @Test
-    public void testBeanPostProcessor(){
+    public void testBeanPostProcessor() {
         System.out.println("容器初始化完成！");
         applicationContext.close();
+    }
+
+    /**
+     * 使用外部属性文件
+     */
+    @Test
+    public void testPropertyPlaceholder() {
+        Book book02 = applicationContext.getBean("book02", Book.class);
+        System.out.println(book02);
     }
 }
