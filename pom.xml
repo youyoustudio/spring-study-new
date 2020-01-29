@@ -24,12 +24,19 @@
             <artifactId>spring-aop</artifactId>
             <version>5.0.8.RELEASE</version>
         </dependency>
+        <!--测试包-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.0.8.RELEASE</version>
+        </dependency>
     </dependencies>
     <modules>
         <module>spring-study-new-lesson01</module>
         <module>spring-ioc-01</module>
         <module>spring-ioc-02</module>
         <module>spring-ioc-03</module>
+        <module>spring-ioc-04</module>
     </modules>
 
 

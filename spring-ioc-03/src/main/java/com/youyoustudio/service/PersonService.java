@@ -13,4 +13,9 @@ public class PersonService {
     public void saveDb() {
         personDao.saveDb();
     }
+
+    @Autowired
+    public void testMethod(PersonDao personDao1) {
+        System.out.println("Spring运行testMethod" + personDao1);
+    }
 }

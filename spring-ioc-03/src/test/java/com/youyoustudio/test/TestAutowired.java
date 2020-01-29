@@ -14,4 +14,9 @@ public class TestAutowired {
         PersonController personController = applicationContext.getBean(PersonController.class);
         personController.doGet();
     }
+
+    @Test
+    public void testAutowiredMethod() {
+
+    }
 }
