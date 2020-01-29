@@ -6,5 +6,24 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <!--配置组件扫描base包-->
-    <context:component-scan base-package="com.youyoustudio"/>
+    <context:component-scan base-package="com.youyoustudio" use-default-filters="false">
+        <!--
+        context:exclude-filter:扫描时，排除一些不要的组件
+        type="annotation"：指定排除规则，按照注解排除，标注了指定注解的组件不添加到容器中。expression：注解的全类名
+        type="assignable":指定排除某个具体的类；expression：类的全类名
+        type="aspectj"：aspectj表达式
+        type="custom":自定义一个TypeFilter，自己写代码决定哪些使用
+        type="regex":正则表达式
+        -->
+        <!--不扫描添加了@Controller注解的组件-->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+
+        <!--
+        context:include-filter:只扫描哪些组件。默认是全部扫描进来。
+        要使用该规则时，需要将父级context:component-sacn的 use-default-filters="false"；
+        -->
+        <!--只扫描添加了@Controller和@Service注解的组件-->
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
 </beans>
