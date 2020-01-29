@@ -37,6 +37,7 @@
         <module>spring-ioc-02</module>
         <module>spring-ioc-03</module>
         <module>spring-ioc-04</module>
+        <module>spring-aop-01</module>
     </modules>
 
 
