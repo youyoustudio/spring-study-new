@@ -1,8 +1,11 @@
 package com.youyoustudio.impl;
 
 import com.youyoustudio.inter.Calculator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MyCalculator implements Calculator {
+
     public int add(int i, int j) {
         int result = i + j;
         return result;
