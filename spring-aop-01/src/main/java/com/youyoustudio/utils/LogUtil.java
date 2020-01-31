@@ -1,8 +1,13 @@
 package com.youyoustudio.utils;
 
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
 
 /**
  * 如何将这个类（切面类）中的这些方法（通知方法）动态地在目标方法中运行的各个位置切入
@@ -29,25 +34,46 @@ public class LogUtil {
 
     //执行目标方法之前 写入切入点表达式 execution(访问权限 返回值 方法签名)
     @Before("execution(public int com.youyoustudio.impl.MyCalculator.*(int,int))")
-    public void logStart() {
-        System.out.println("[XXXX]方法开始执行，用的参数列表是[XXXX]");
+    public void logStart(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        Signature signature = joinPoint.getSignature();//获取到方法签名
+        System.out.println("[" + signature.getName() + "]方法开始执行，用的参数列表是[" + Arrays.asList(args) + "]");
     }
 
     //目标方法正常执行完成之后执行
-    @AfterReturning("execution(public int com.youyoustudio.impl.MyCalculator.*(int,int))")
-    public void logReturn() {
-        System.out.println("[XXXX]方法正常执行完成，计算结果是：");
+    @AfterReturning(value = "execution(public int com.youyoustudio.impl.MyCalculator.*(int,int))",
+            returning = "result")
+    public void logReturn(JoinPoint joinPoint, Object result) {
+        System.out.println("[" + joinPoint.getSignature().getName() + "]方法正常执行完成，计算结果是：" + result);
     }
 
     //目标方法出现异常
-    @AfterThrowing("execution(public int com.youyoustudio.impl.MyCalculator.*(int,int))")
-    public void logException() {
-        System.out.println("[XXXX]方法执行出现异常，异常信息：");
+    @AfterThrowing(value = "execution(public int com.youyoustudio.impl.MyCalculator.*(int,int))",
+            throwing = "exception")
+    public void logException(JoinPoint joinPoint, Exception exception) {
+        System.out.println("[" + joinPoint.getSignature().getName() + "]方法执行出现异常，异常信息：" + exception);
+        exception.printStackTrace();
     }
 
     //目标方法最终结束之前
     @After("execution(public int com.youyoustudio.impl.MyCalculator.*(int,int))")
     public void logEnd() {
         System.out.println("[XXXX]方法最终结束了");
+    }
+
+
+    /**
+     * @Around 环绕通知方法，就是前4个方法合一
+     */
+    @Around("execution(public int com.youyoustudio.impl.MyCalculator.*(int,int))")
+    public Object aroundMethod(ProceedingJoinPoint proceedingJoinPoint) {
+        try {
+            //相当于method.invoke(obj,args);
+            Object result = proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
+            return result;//将返回值返回回去
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

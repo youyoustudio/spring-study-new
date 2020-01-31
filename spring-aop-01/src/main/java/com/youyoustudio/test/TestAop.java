@@ -34,4 +34,23 @@ public class TestAop {
         System.out.println(myCalculator01.getClass());
     }
 
+    /**
+     * 测试JoinPoint
+     */
+    @Test
+    public void testJoinPoint() {
+        Calculator calculator = applicationContext.getBean(Calculator.class);
+        //calculator.add(1,2);
+        calculator.div(1, 0);
+    }
+
+    /**
+     * 环绕通知方法测试
+     */
+    @Test
+    public void testAround() {
+        Calculator calculator = applicationContext.getBean(Calculator.class);
+        calculator.add(1, 2);
+    }
+
 }
