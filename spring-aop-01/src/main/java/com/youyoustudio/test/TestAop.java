@@ -15,7 +15,7 @@ public class TestAop {
     public void testAop() {
         //获取类型时，一定要用接口，不要使用实现类的类型
         Calculator calculator = applicationContext.getBean(Calculator.class);
-        int result = calculator.add(1, 2);
+        int result = calculator.div(1, 0);
         System.out.println(result);
         System.out.println(calculator);
         System.out.println(calculator.getClass());
