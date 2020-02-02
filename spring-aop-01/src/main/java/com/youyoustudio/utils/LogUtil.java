@@ -66,14 +66,14 @@ public class LogUtil {
      * @Around 环绕通知方法，就是前4个方法合一
      */
     @Around("execution(public int com.youyoustudio.impl.MyCalculator.*(int,int))")
-    public Object aroundMethod(ProceedingJoinPoint proceedingJoinPoint) {
+    public Object aroundMethod(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         try {
             //相当于method.invoke(obj,args);
             Object result = proceedingJoinPoint.proceed(proceedingJoinPoint.getArgs());
             return result;//将返回值返回回去
         } catch (Throwable e) {
             e.printStackTrace();
+            throw e;//为了让外界知道异常，此处需要将异常抛出，否则，异常将被吃掉
         }
-        return null;
     }
 }
